@@ -1,16 +1,11 @@
 import React from 'react';
 import './App.css';
-
-import { Button } from "@material-ui/core";
+import { AppLayout } from "./components/platform/AppLayout";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <Button variant="contained" color="primary">
-          Hello World
-        </Button>
-      </header>
+        <AppLayout />
     </div>
   );
 }
