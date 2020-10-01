@@ -6,17 +6,17 @@ import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import {fade, makeStyles, useTheme} from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import SvgIcon from "@material-ui/core/SvgIcon";
+
+import {SettingsIcon, NotificationsIcon} from "../../assets/icons";
 
 const useStyles = (config) => {
     const { drawerWidth } = config;
@@ -26,6 +26,7 @@ const useStyles = (config) => {
                 width: `calc(100% - ${drawerWidth}px)`,
                 marginLeft: drawerWidth,
             },
+            backgroundColor: theme.palette.common.white
         },
         menuButton: {
             marginRight: theme.spacing(2),
@@ -47,18 +48,18 @@ const useStyles = (config) => {
             borderRadius: theme.shape.borderRadius,
             backgroundColor: fade(theme.palette.common.white, 0.15),
             '&:hover': {
-                backgroundColor: fade(theme.palette.common.white, 0.25),
+                backgroundColor: fade(theme.palette.common.black, 0.05),
             },
             marginRight: theme.spacing(2),
             marginLeft: 0,
+            padding: theme.spacing(0, 1),
             width: '100%',
             [theme.breakpoints.up('sm')]: {
-                marginLeft: theme.spacing(3),
+                // marginLeft: theme.spacing(3),
                 width: 'auto',
             },
         },
         searchIcon: {
-            padding: theme.spacing(0, 2),
             height: '100%',
             position: 'absolute',
             pointerEvents: 'none',
@@ -72,7 +73,7 @@ const useStyles = (config) => {
         inputInput: {
             padding: theme.spacing(1, 1, 1, 0),
             // vertical padding + font size from searchIcon
-            paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+            paddingLeft: `calc(1em + ${theme.spacing(2)}px)`,
             transition: theme.transitions.create('width'),
             width: '100%',
             [theme.breakpoints.up('md')]: {
@@ -91,11 +92,19 @@ const useStyles = (config) => {
                 display: 'none',
             },
         },
+        vDivider: {
+            margin: theme.spacing(2, 1)
+        },
+        avatar: {
+            width: theme.spacing(4),
+            height: theme.spacing(4),
+        }
     }))();
 };
 
 export const TopBar = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
     const classes = useStyles({ drawerWidth });
+    const theme = useTheme();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -148,29 +157,30 @@ export const TopBar = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
             onClose={handleMobileMenuClose}
         >
             <MenuItem>
-                <IconButton aria-label="show 4 new mails" color="inherit">
-                    <Badge badgeContent={4} color="secondary">
-                        <MailIcon />
-                    </Badge>
+                <IconButton>
+                    <SvgIcon
+                        component={SettingsIcon}
+                        viewBox="0 0 16 16"
+                        fontSize="small"
+                        style={{ color: theme.palette.primary.light}}
+                    />
                 </IconButton>
-                <p>Messages</p>
+                <p>Settings</p>
             </MenuItem>
             <MenuItem>
-                <IconButton aria-label="show 11 new notifications" color="inherit">
-                    <Badge badgeContent={11} color="secondary">
-                        <NotificationsIcon />
-                    </Badge>
+                <IconButton>
+                    <SvgIcon
+                        component={NotificationsIcon}
+                        viewBox="0 0 16 16"
+                        fontSize="small"
+                        style={{ color: theme.palette.primary.light}}
+                    />
                 </IconButton>
                 <p>Notifications</p>
             </MenuItem>
             <MenuItem onClick={handleProfileMenuOpen}>
-                <IconButton
-                    aria-label="account of current user"
-                    aria-controls="primary-search-account-menu"
-                    aria-haspopup="true"
-                    color="inherit"
-                >
-                    <AccountCircle />
+                <IconButton>
+                    <AccountCircle style={{ color: theme.palette.primary.light}}/>
                 </IconButton>
                 <p>Profile</p>
             </MenuItem>
@@ -204,17 +214,23 @@ export const TopBar = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
                 </div>
                 <div className={classes.grow} />
                 <div className={classes.sectionDesktop}>
-                    <IconButton aria-label="show 4 new mails" color="inherit">
-                        <Badge badgeContent={4} color="secondary">
-                            <MailIcon />
-                        </Badge>
+                    <IconButton>
+                        <SvgIcon
+                            component={SettingsIcon}
+                            viewBox="0 0 16 16"
+                            fontSize="small"
+                            style={{ color: theme.palette.primary.light}}
+                        />
                     </IconButton>
-                    <IconButton aria-label="show 17 new notifications" color="inherit">
-                        <Badge badgeContent={17} color="secondary">
-                            <NotificationsIcon />
-                        </Badge>
+                    <IconButton>
+                        <SvgIcon
+                            component={NotificationsIcon}
+                            viewBox="0 0 16 16"
+                            fontSize="small"
+                            style={{ color: theme.palette.primary.light}}
+                        />
                     </IconButton>
-                    <Divider orientation="vertical" light flexItem />
+                    <Divider className={classes.vDivider} orientation="vertical" light flexItem />
                     <IconButton
                         edge="end"
                         aria-label="account of current user"
@@ -232,9 +248,8 @@ export const TopBar = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
                         aria-controls={menuId}
                         aria-haspopup="true"
                         onClick={handleProfileMenuOpen}
-                        color="inherit"
                     >
-                        <Avatar>H</Avatar>
+                        <Avatar className={classes.avatar}>H</Avatar>
                     </IconButton>
                 </div>
                 <div className={classes.sectionMobile}>
