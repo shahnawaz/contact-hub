@@ -22,7 +22,7 @@ import {routes, routesMap} from "../../router";
 const useStyles = (config) => {
     const { drawerWidth } = config;
     return makeStyles((theme) => ({
-        sideNav: {
+        cSideNav: {
             [theme.breakpoints.up('sm')]: {
                 width: drawerWidth,
                 flexShrink: 0,
@@ -132,7 +132,7 @@ export const SideNav = ({ drawerWidth, isDrawerOpen, handleDrawerToggle }) => {
     );
 
     return (
-        <nav className={classes.sideNav}>
+        <nav className={classes.cSideNav}>
             <Hidden smUp implementation="css">
                 <Drawer
                     container={container}

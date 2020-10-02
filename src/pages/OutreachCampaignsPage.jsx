@@ -26,7 +26,7 @@ const OutreachCampaignsPage = (props) => {
     };
 
     return (
-        <Box>
+        <Box className="c-outreach-campaigns-page">
 
             {/* Main Heading */}
             <Box display="flex" justifyContent="space-between" alignItems="center">

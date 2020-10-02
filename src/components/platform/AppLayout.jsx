@@ -19,7 +19,7 @@ const drawerWidth = 260;
 // Style
 const useStyles = () => {
     return makeStyles((theme) => ({
-        appLayout: {
+        cAppLayout: {
             display: 'flex',
         },
         toolbar: theme.mixins.toolbar,
@@ -48,7 +48,7 @@ export const AppLayout = (props) => {
 
     return (
         <Router>
-            <div className={classes.appLayout}>
+            <div className={classes.cAppLayout}>
 
                 <TopBar
                     drawerWidth={drawerWidth}
@@ -64,18 +64,18 @@ export const AppLayout = (props) => {
 
                 <main className={classes.main}>
                     <div className={classes.toolbar} />
-                        <div className={classes.content}>
-                            <Switch>
-                                {routes.map((route, i) => (
-                                    <Route
-                                        key={i}
-                                        exact={route.exact}
-                                        path={route.path}
-                                        render={props => <route.component {...props} />}
-                                    />
-                                ))}
-                            </Switch>
-                        </div>
+                    <div className={classes.content}>
+                        <Switch>
+                            {routes.map((route, i) => (
+                                <Route
+                                    key={i}
+                                    exact={route.exact}
+                                    path={route.path}
+                                    render={props => <route.component {...props} />}
+                                />
+                            ))}
+                        </Switch>
+                    </div>
                 </main>
 
             </div>

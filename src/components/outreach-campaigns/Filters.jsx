@@ -16,7 +16,7 @@ import { useTheme } from "@material-ui/core/styles";
 
 // Style
 const useStyles = makeStyles((theme) => ({
-    filters: {
+    cFilters: {
         backgroundColor: theme.palette.common.white,
         margin: theme.spacing(2, 0),
         padding: theme.spacing(1, 2),
@@ -113,7 +113,7 @@ export const Filters = ({ activeFilters = {}, onChange }) => {
     );
 
     return (
-        <Box className={classes.filters} display="flex" justifyContent="space-between" alignItems="center">
+        <Box className={classes.cFilters} display="flex" justifyContent="space-between" alignItems="center">
 
             <Box display="flex" justifyContent="space-between" alignItems="center" className="filters-header">
                 <Box fontSize="h6.fontSize">Filter Campaigns</Box>

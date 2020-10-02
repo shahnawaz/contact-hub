@@ -26,7 +26,7 @@ import { SettingsIcon, NotificationsIcon } from "../../assets/icons";
 const useStyles = (config) => {
     const { drawerWidth } = config;
     return makeStyles((theme) => ({
-        appBar: {
+        cAppBar: {
             [theme.breakpoints.up('sm')]: {
                 width: `calc(100% - ${drawerWidth}px)`,
                 marginLeft: drawerWidth,
@@ -179,7 +179,7 @@ export const TopBar = ({ drawerWidth, isDrawerOpen, handleDrawerToggle }) => {
     );
 
     return (
-        <AppBar position="fixed" className={classes.appBar}>
+        <AppBar position="fixed" className={classes.cAppBar}>
             <Toolbar>
 
                 {/* Side Nav Drawer Toggle Icon */}

@@ -9,6 +9,10 @@ import Pagination from "@material-ui/lab/Pagination";
 
 // Style
 const useStyles = makeStyles((theme) => ({
+    cCampaignsList: {
+        height: 400,
+        width: '100%'
+    },
     dataTable: {
         '&.MuiDataGrid-root': {
             border: 'none'
@@ -72,18 +76,16 @@ const rows = [
 export const CampaignsList = ({ activeFilters }) => {
     const classes = useStyles();
 
-    // TODO: Add Pagination code (with sorting)
-
+    /*
     const loadCampaigns = () => {
-        /**
-         * TODO:
-         * 1. Use service to fake data loading with active filters and pagination
-         * 2. Update local list
-         */
+         // * TODO:
+         // * 1. Use service to fake data loading with active filters and pagination
+         // * 2. Update local list
     };
+    */
 
     return (
-        <Box style={{ height: 400, width: '100%' }}>
+        <Box className={classes.cCampaignsList}>
             <DataGrid
                 rows={rows}
                 columns={columns}

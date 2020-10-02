@@ -4,7 +4,7 @@ import { Box } from '@material-ui/core';
 
 const ProspectingCampaignsPage = (props) => {
     return (
-        <Box>
+        <Box className="c-prospecting-campaigns-page">
 
             {/* Main Heading */}
             <Box display="flex" justifyContent="space-between" alignItems="center">

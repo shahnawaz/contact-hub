@@ -4,7 +4,7 @@ import { Box } from '@material-ui/core';
 
 const ContactsPage = (props) => {
     return (
-        <Box>
+        <Box className="c-contacts-page">
 
             {/* Main Heading */}
             <Box display="flex" justifyContent="space-between" alignItems="center">

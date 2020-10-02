@@ -4,7 +4,7 @@ import { Box } from '@material-ui/core';
 
 const DashboardPage = (props) => {
     return (
-        <Box>
+        <Box className="c-dashboard-page">
 
             {/* Main Heading */}
             <Box display="flex" justifyContent="space-between" alignItems="center">
