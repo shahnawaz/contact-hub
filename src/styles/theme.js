@@ -15,7 +15,8 @@ const palette = {
         sharperBlue: '#1062E5',
         smoothRed: '#FF6565',
         textGray: '#4D4F5C',
-        secondaryExtraLight: '#838296'
+        secondaryExtraLight: '#838296',
+        lightPurple: '#F0F0F7'
     },
 };
 
@@ -33,7 +34,8 @@ export const theme = createMuiTheme({
         MuiCssBaseline: {
             '@global': {
                 body: {
-                    color: palette.others.textGray
+                    color: palette.others.textGray,
+                    backgroundColor: palette.others.lightPurple
                 },
                 '.MuiSvgIcon-root': {
                     color: palette.primary.light
