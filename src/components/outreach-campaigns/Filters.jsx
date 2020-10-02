@@ -5,28 +5,45 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import {makeStyles} from "@material-ui/core/styles";
+import FilterList from "@material-ui/icons/FilterList";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import IconButton from "@material-ui/core/IconButton";
+import {useMediaQuery} from "@material-ui/core";
+import useTheme from "@material-ui/core/styles/useTheme";
 
 const useStyles = makeStyles((theme) => ({
+    filters: {
+        backgroundColor: theme.palette.common.white,
+        margin: theme.spacing(2, 0),
+        padding: theme.spacing(1, 2),
+        [theme.breakpoints.down('sm')]: {
+            flexGrow: 1,
+            flexDirection: 'column',
+            alignItems: 'inherit'
+        }
+    },
     formControl: {
         margin: theme.spacing(1),
-        minWidth: 120,
-    },
-    selectEmpty: {
-        marginTop: theme.spacing(2),
-    },
+        flexGrow: 1,
+    }
 }));
 
 export const Filters = ({ activeFilters = {}, onChange }) => {
     const classes = useStyles();
+
+    const theme = useTheme();
+    const isBelowSM = useMediaQuery(theme.breakpoints.down('sm'));
+
+    const [showMobileFilters, setShowMobileFilters] = React.useState(false);
+
     const [age, setAge] = React.useState('');
 
     const handleChange = (event) => {
         setAge(event.target.value);
     };
 
-    return (
-        <Box display="flex" justifyContent="space-between">
-            <Box>Filter Campaigns</Box>
+    const renderFilters = () => (
+        <>
             <FormControl variant="outlined" className={classes.formControl}>
                 <InputLabel id="demo-simple-select-outlined-label">Select User</InputLabel>
                 <Select
@@ -78,6 +95,47 @@ export const Filters = ({ activeFilters = {}, onChange }) => {
                     <MenuItem value={30}>Thirty</MenuItem>
                 </Select>
             </FormControl>
+        </>
+    );
+
+    const renderMobileFilters = () => (
+        <>
+            <Box display="flex" flexDirection="column" flexGrow="1" className="filters-inputs">
+                { renderFilters() }
+            </Box>
+        </>
+    );
+
+    const renderDesktopFilters = () => (
+        <>
+            <Box display="flex" flexGrow="1" className="filters-inputs">
+                { renderFilters() }
+            </Box>
+        </>
+    );
+
+    return (
+        <Box className={classes.filters} display="flex" justifyContent="space-between" alignItems="center">
+
+            <Box display="flex" justifyContent="space-between" alignItems="center" className="filters-header">
+                <Box fontSize="h6.fontSize">Filter Campaigns</Box>
+
+                {
+                    isBelowSM && <IconButton
+                        aria-label="open filters"
+                        edge="start"
+                        onClick={() => setShowMobileFilters(!showMobileFilters)}
+                    >
+                        { showMobileFilters && <ExpandLess /> }
+                        { !showMobileFilters && <FilterList /> }
+                    </IconButton>
+                }
+
+            </Box>
+
+            { isBelowSM && showMobileFilters && renderMobileFilters() }
+            { !isBelowSM && renderDesktopFilters() }
+
         </Box>
     );
 };

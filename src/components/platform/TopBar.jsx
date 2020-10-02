@@ -68,7 +68,7 @@ const useStyles = (config) => {
             justifyContent: 'center',
         },
         inputRoot: {
-            color: 'inherit',
+            // color: 'inherit',
         },
         inputInput: {
             padding: theme.spacing(1, 1, 1, 0),
@@ -191,7 +191,6 @@ export const TopBar = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
         <AppBar position="fixed" className={classes.appBar}>
             <Toolbar>
                 <IconButton
-                    color="inherit"
                     aria-label="open drawer"
                     edge="start"
                     onClick={handleDrawerToggle}
@@ -219,7 +218,6 @@ export const TopBar = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
                             component={SettingsIcon}
                             viewBox="0 0 16 16"
                             fontSize="small"
-                            style={{ color: theme.palette.primary.light}}
                         />
                     </IconButton>
                     <IconButton>
@@ -227,7 +225,6 @@ export const TopBar = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
                             component={NotificationsIcon}
                             viewBox="0 0 16 16"
                             fontSize="small"
-                            style={{ color: theme.palette.primary.light}}
                         />
                     </IconButton>
                     <Divider className={classes.vDivider} orientation="vertical" light flexItem />
@@ -237,7 +234,6 @@ export const TopBar = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
                         aria-controls={menuId}
                         aria-haspopup="true"
                         onClick={handleProfileMenuOpen}
-                        color="inherit"
                     >
                         <Typography>Jon Doe</Typography>
                         <ExpandMore />
@@ -258,7 +254,6 @@ export const TopBar = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
                         aria-controls={mobileMenuId}
                         aria-haspopup="true"
                         onClick={handleMobileMenuOpen}
-                        color="inherit"
                     >
                         <MoreIcon />
                     </IconButton>

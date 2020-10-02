@@ -85,7 +85,6 @@ export const SideNav = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
                             <SvgIcon
                                 component={item.icon}
                                 viewBox="0 0 24 24"
-                                style={{ color: item.isSelected ? theme.palette.secondary.main : theme.palette.primary.light}}
                             />
                         </ListItemIcon>
                         <ListItemText primary={item.displayName} />

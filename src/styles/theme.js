@@ -2,17 +2,25 @@ import { createMuiTheme } from '@material-ui/core/styles';
 
 const defaultTheme = createMuiTheme();
 
-export const theme = createMuiTheme({
-    palette: {
-        primary: {
-            main: '#43425D',
-            light: '#A5A4BF',
-            contrastText: '#4D4F5C',
-        },
-        secondary: {
-            main: '#A3A0FB',
-        },
+const palette = {
+    primary: {
+        main: '#43425D',
+        light: '#A5A4BF'
     },
+    secondary: {
+        main: '#A3A0FB',
+    },
+    others: {
+        sharpBlue: '#3B86FF',
+        sharperBlue: '#1062E5',
+        smoothRed: '#FF6565',
+        textGray: '#4D4F5C',
+        secondaryExtraLight: '#838296'
+    },
+};
+
+export const theme = createMuiTheme({
+    palette: palette,
     mixins: {
         toolbar: {
             minHeight: 70
@@ -22,6 +30,33 @@ export const theme = createMuiTheme({
         fontFamily: "'Source Sans Pro'", // loaded in public/index.html
     },
     overrides: {
+        MuiCssBaseline: {
+            '@global': {
+                body: {
+                    color: palette.others.textGray
+                },
+                '.MuiSvgIcon-root': {
+                    color: palette.primary.light
+                },
+                '.Mui-selected': {
+                    '& .MuiSvgIcon-root': {
+                        color: palette.secondary.main
+                    }
+                },
+                '.MuiButtonBase-root': {
+                    '&.f-sharper-blue': {
+                        backgroundColor: palette.others.sharperBlue,
+                        color: defaultTheme.palette.common.white,
+                        '& .MuiSvgIcon-root': {
+                            color: defaultTheme.palette.common.white
+                        },
+                        '&:hover': {
+                            backgroundColor: palette.others.sharpBlue,
+                        }
+                    }
+                }
+            },
+        },
         MuiToolbar: {
             gutters: {
                 [defaultTheme.breakpoints.up('sm')]: {
@@ -29,6 +64,6 @@ export const theme = createMuiTheme({
                     paddingRight: '16px',
                 },
             },
-        },
+        }
     },
 });

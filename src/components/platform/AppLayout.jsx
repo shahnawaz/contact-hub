@@ -13,8 +13,15 @@ const useStyles = () => {
         },
         toolbar: theme.mixins.toolbar,
         main: {
+            width: '100%',
             [theme.breakpoints.up('sm')]: {
                 width: `calc(100% - ${drawerWidth}px)`,
+            },
+        },
+        content: {
+            padding: theme.spacing(2, 2),
+            [theme.breakpoints.up('sm')]: {
+                padding: theme.spacing(4, 9)
             },
         }
     }))();
@@ -42,7 +49,9 @@ export const AppLayout = (props) => {
             />
             <main className={classes.main}>
                 <div className={classes.toolbar} />
-                <OutreachCampaigns />
+                <div className={classes.content}>
+                    <OutreachCampaigns />
+                </div>
             </main>
         </div>
     );
