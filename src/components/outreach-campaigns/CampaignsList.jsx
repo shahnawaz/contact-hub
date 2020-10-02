@@ -1,13 +1,17 @@
-import React from 'react';
+// 3rd party modules/packages
+import React from "react";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 
+// Style
 const useStyles = makeStyles({
     table: {
         minWidth: 650,
@@ -26,7 +30,7 @@ const rows = [
     createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-export const CampaignsList = () => {
+export const CampaignsList = ({ activeFilters }) => {
     const classes = useStyles();
 
     // TODO: Add Pagination code (with sorting)
@@ -34,7 +38,7 @@ export const CampaignsList = () => {
     const loadCampaigns = () => {
         /**
          * TODO:
-         * 1. Use service to fake data loading with filters and pagination
+         * 1. Use service to fake data loading with active filters and pagination
          * 2. Update local list
          */
     };

@@ -1,11 +1,17 @@
+// 3rd party modules/packages
 import React from 'react';
+import { makeStyles } from "@material-ui/core/styles";
+
+// Pages
+import OutreachCampaigns from "../../pages/OutreachCampaigns";
+
+// Components
 import { SideNav } from "./SideNav";
 import { TopBar } from "./TopBar";
-import OutreachCampaigns from "../../pages/OutreachCampaigns";
-import { makeStyles } from "@material-ui/core/styles";
 
 const drawerWidth = 260;
 
+// Style
 const useStyles = () => {
     return makeStyles((theme) => ({
         appLayout: {
@@ -29,22 +35,22 @@ const useStyles = () => {
 
 export const AppLayout = (props) => {
     const classes = useStyles();
-    const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
     const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen);
+        setIsDrawerOpen(!isDrawerOpen);
     };
 
     return (
         <div className={classes.appLayout}>
             <TopBar
                 drawerWidth={drawerWidth}
-                mobileOpen={mobileOpen}
+                isDrawerOpen={isDrawerOpen}
                 handleDrawerToggle={handleDrawerToggle}
             />
             <SideNav
                 drawerWidth={drawerWidth}
-                mobileOpen={mobileOpen}
+                isDrawerOpen={isDrawerOpen}
                 handleDrawerToggle={handleDrawerToggle}
             />
             <main className={classes.main}>

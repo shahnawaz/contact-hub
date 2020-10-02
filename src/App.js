@@ -1,16 +1,19 @@
+// 3rd party modules/packages
 import React from 'react';
+import { CssBaseline } from "@material-ui/core";
 import { ThemeProvider } from '@material-ui/core/styles';
-import CssBaseline from "@material-ui/core/CssBaseline";
 
-import './App.css';
+// Components
 import { AppLayout } from "./components/platform/AppLayout";
+
+// Others
 import { theme } from "./styles/theme";
 
 function App() {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <div className="App">
+            <div className="contact-hub-app">
                 <AppLayout />
             </div>
         </ThemeProvider>

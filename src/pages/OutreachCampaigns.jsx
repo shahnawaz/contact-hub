@@ -1,24 +1,23 @@
+// 3rd party modules/packages
 import React from 'react';
-import Box from "@material-ui/core/Box";
-import Container from "@material-ui/core/Container";
-import Button from "@material-ui/core/Button";
+import {
+    Box,
+    Button,
+    Fab
+} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
+// Components
 import { Filters } from "../components/outreach-campaigns/Filters";
 import { CampaignsList } from "../components/outreach-campaigns/CampaignsList";
-import {useTheme} from "@material-ui/core";
-import IconButton from "@material-ui/core/IconButton";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import MenuItem from "@material-ui/core/MenuItem";
-import Fab from "@material-ui/core/Fab";
 
 const OutreachCampaigns = (props) => {
-    const theme = useTheme();
     const [activeFilters, setActiveFilters] = React.useState({});
 
     const onFiltersChange = (updatedFilters) => {
         // TODO:
         // 1. set active filters
+        setActiveFilters(updatedFilters);
         // 2. call Get campaigns API with updated filters
     };
 
@@ -52,7 +51,7 @@ const OutreachCampaigns = (props) => {
             <Filters activeFilters={activeFilters} onChange={onFiltersChange} />
 
             {/* Campaigns List */}
-            <CampaignsList />
+            <CampaignsList activeFilters={activeFilters} />
 
         </Box>
     );

@@ -1,16 +1,20 @@
+// 3rd party modules/packages
 import React from "react";
-import Box from "@material-ui/core/Box";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import {makeStyles} from "@material-ui/core/styles";
-import FilterList from "@material-ui/icons/FilterList";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import IconButton from "@material-ui/core/IconButton";
-import {useMediaQuery} from "@material-ui/core";
-import useTheme from "@material-ui/core/styles/useTheme";
+import {
+    Box,
+    FormControl,
+    Select,
+    MenuItem,
+    IconButton,
+    InputLabel,
+    useMediaQuery
+} from '@material-ui/core';
+import { makeStyles } from "@material-ui/core/styles";
+import FilterListIcon from "@material-ui/icons/FilterList";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import { useTheme } from "@material-ui/core/styles";
 
+// Style
 const useStyles = makeStyles((theme) => ({
     filters: {
         backgroundColor: theme.palette.common.white,
@@ -30,14 +34,12 @@ const useStyles = makeStyles((theme) => ({
 
 export const Filters = ({ activeFilters = {}, onChange }) => {
     const classes = useStyles();
-
     const theme = useTheme();
-    const isBelowSM = useMediaQuery(theme.breakpoints.down('sm'));
 
+    const isBelowSM = useMediaQuery(theme.breakpoints.down('sm'));
     const [showMobileFilters, setShowMobileFilters] = React.useState(false);
 
     const [age, setAge] = React.useState('');
-
     const handleChange = (event) => {
         setAge(event.target.value);
     };
@@ -87,12 +89,8 @@ export const Filters = ({ activeFilters = {}, onChange }) => {
                     onChange={handleChange}
                     label="Active"
                 >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
+                    <MenuItem value={true}>Active</MenuItem>
+                    <MenuItem value={false}>In-Active</MenuItem>
                 </Select>
             </FormControl>
         </>
@@ -126,14 +124,15 @@ export const Filters = ({ activeFilters = {}, onChange }) => {
                         edge="start"
                         onClick={() => setShowMobileFilters(!showMobileFilters)}
                     >
-                        { showMobileFilters && <ExpandLess /> }
-                        { !showMobileFilters && <FilterList /> }
+                        { showMobileFilters && <ExpandLessIcon /> }
+                        { !showMobileFilters && <FilterListIcon /> }
                     </IconButton>
                 }
 
             </Box>
 
             { isBelowSM && showMobileFilters && renderMobileFilters() }
+
             { !isBelowSM && renderDesktopFilters() }
 
         </Box>

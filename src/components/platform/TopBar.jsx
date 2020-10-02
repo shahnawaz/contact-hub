@@ -1,23 +1,28 @@
+// 3rd party modules/packages
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import IconButton from '@material-ui/core/IconButton';
+import {
+    AppBar,
+    IconButton,
+    Divider,
+    Avatar,
+    Typography,
+    Toolbar,
+    InputBase,
+    MenuItem,
+    Menu,
+    SvgIcon
+} from '@material-ui/core';
+import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
-import Divider from '@material-ui/core/Divider';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
-import Toolbar from '@material-ui/core/Toolbar';
-import {fade, makeStyles, useTheme} from '@material-ui/core/styles';
-import InputBase from '@material-ui/core/InputBase';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import SvgIcon from "@material-ui/core/SvgIcon";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-import {SettingsIcon, NotificationsIcon} from "../../assets/icons";
+// Others
+import { SettingsIcon, NotificationsIcon } from "../../assets/icons";
 
+// Style
 const useStyles = (config) => {
     const { drawerWidth } = config;
     return makeStyles((theme) => ({
@@ -37,12 +42,6 @@ const useStyles = (config) => {
         grow: {
             flexGrow: 1,
         },
-        title: {
-            display: 'none',
-            [theme.breakpoints.up('sm')]: {
-                display: 'block',
-            },
-        },
         search: {
             position: 'relative',
             borderRadius: theme.shape.borderRadius,
@@ -55,7 +54,6 @@ const useStyles = (config) => {
             padding: theme.spacing(0, 1),
             width: '100%',
             [theme.breakpoints.up('sm')]: {
-                // marginLeft: theme.spacing(3),
                 width: 'auto',
             },
         },
@@ -66,9 +64,6 @@ const useStyles = (config) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-        },
-        inputRoot: {
-            // color: 'inherit',
         },
         inputInput: {
             padding: theme.spacing(1, 1, 1, 0),
@@ -102,9 +97,8 @@ const useStyles = (config) => {
     }))();
 };
 
-export const TopBar = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
+export const TopBar = ({ drawerWidth, isDrawerOpen, handleDrawerToggle }) => {
     const classes = useStyles({ drawerWidth });
-    const theme = useTheme();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -130,7 +124,7 @@ export const TopBar = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
     };
 
     const menuId = 'primary-search-account-menu';
-    const renderMenu = (
+    const renderMenu = () => (
         <Menu
             anchorEl={anchorEl}
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -145,8 +139,21 @@ export const TopBar = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
         </Menu>
     );
 
+    const renderSvgActionIcon = ({ svgComponent, title = '' }) => (
+        <>
+            <IconButton>
+                <SvgIcon
+                    component={svgComponent}
+                    viewBox="0 0 16 16"
+                    fontSize="small"
+                />
+            </IconButton>
+            { title && <p>{title}</p> }
+        </>
+    );
+
     const mobileMenuId = 'primary-search-account-menu-mobile';
-    const renderMobileMenu = (
+    const renderMobileMenu = () => (
         <Menu
             anchorEl={mobileMoreAnchorEl}
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -157,30 +164,14 @@ export const TopBar = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
             onClose={handleMobileMenuClose}
         >
             <MenuItem>
-                <IconButton>
-                    <SvgIcon
-                        component={SettingsIcon}
-                        viewBox="0 0 16 16"
-                        fontSize="small"
-                        style={{ color: theme.palette.primary.light}}
-                    />
-                </IconButton>
-                <p>Settings</p>
+                { renderSvgActionIcon({ svgComponent: SettingsIcon, title: 'Settings' }) }
             </MenuItem>
             <MenuItem>
-                <IconButton>
-                    <SvgIcon
-                        component={NotificationsIcon}
-                        viewBox="0 0 16 16"
-                        fontSize="small"
-                        style={{ color: theme.palette.primary.light}}
-                    />
-                </IconButton>
-                <p>Notifications</p>
+                { renderSvgActionIcon({ svgComponent: NotificationsIcon, title: 'Notifications' }) }
             </MenuItem>
             <MenuItem onClick={handleProfileMenuOpen}>
                 <IconButton>
-                    <AccountCircle style={{ color: theme.palette.primary.light}}/>
+                    <AccountCircleIcon/>
                 </IconButton>
                 <p>Profile</p>
             </MenuItem>
@@ -190,6 +181,8 @@ export const TopBar = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
     return (
         <AppBar position="fixed" className={classes.appBar}>
             <Toolbar>
+
+                {/* Side Nav Drawer Toggle Icon */}
                 <IconButton
                     aria-label="open drawer"
                     edge="start"
@@ -198,6 +191,8 @@ export const TopBar = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
                 >
                     <MenuIcon />
                 </IconButton>
+
+                {/* Search Input and Icon */}
                 <div className={classes.search}>
                     <div className={classes.searchIcon}>
                         <SearchIcon />
@@ -205,28 +200,18 @@ export const TopBar = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
                     <InputBase
                         placeholder="Search campaign"
                         classes={{
-                            root: classes.inputRoot,
                             input: classes.inputInput,
                         }}
                         inputProps={{ 'aria-label': 'search' }}
                     />
                 </div>
+
                 <div className={classes.grow} />
+
+                {/* Action Icons */}
                 <div className={classes.sectionDesktop}>
-                    <IconButton>
-                        <SvgIcon
-                            component={SettingsIcon}
-                            viewBox="0 0 16 16"
-                            fontSize="small"
-                        />
-                    </IconButton>
-                    <IconButton>
-                        <SvgIcon
-                            component={NotificationsIcon}
-                            viewBox="0 0 16 16"
-                            fontSize="small"
-                        />
-                    </IconButton>
+                    { renderSvgActionIcon({ svgComponent: SettingsIcon }) }
+                    { renderSvgActionIcon({ svgComponent: NotificationsIcon }) }
                     <Divider className={classes.vDivider} orientation="vertical" light flexItem />
                     <IconButton
                         edge="end"
@@ -236,7 +221,7 @@ export const TopBar = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
                         onClick={handleProfileMenuOpen}
                     >
                         <Typography>Jon Doe</Typography>
-                        <ExpandMore />
+                        <ExpandMoreIcon />
                     </IconButton>
                     <IconButton
                         edge="end"
@@ -248,6 +233,8 @@ export const TopBar = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
                         <Avatar className={classes.avatar}>H</Avatar>
                     </IconButton>
                 </div>
+
+                {/* Mobile Menu Open Icon */}
                 <div className={classes.sectionMobile}>
                     <IconButton
                         aria-label="show more"
@@ -258,9 +245,11 @@ export const TopBar = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
                         <MoreIcon />
                     </IconButton>
                 </div>
+
             </Toolbar>
-            {renderMobileMenu}
-            {renderMenu}
+
+            { renderMobileMenu() }
+            { renderMenu() }
         </AppBar>
     );
 };

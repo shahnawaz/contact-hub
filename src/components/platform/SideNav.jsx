@@ -1,17 +1,22 @@
+// 3rd party modules/packages
 import React from 'react';
-import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
-import List from '@material-ui/core/List';
+import {
+    Divider,
+    Drawer,
+    Hidden,
+    List,
+    ListItem,
+    ListItemText,
+    ListItemIcon,
+    SvgIcon,
+    Box
+} from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 
-import SvgIcon from "@material-ui/core/SvgIcon";
+// Others
 import { DashboardIcon, ContactsIcon, InboxIcon, ProductsIcon } from "../../assets/icons";
-import Box from "@material-ui/core/Box";
 
+// Style
 const useStyles = (config) => {
     const { drawerWidth } = config;
     return makeStyles((theme) => ({
@@ -52,9 +57,10 @@ const useStyles = (config) => {
     }))();
 };
 
-export const SideNav = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
+export const SideNav = ({ drawerWidth, isDrawerOpen, handleDrawerToggle }) => {
     const classes = useStyles({ drawerWidth });
     const theme = useTheme();
+
     const [selectedIndex, setSelectedIndex] = React.useState(1);
     const container = window !== undefined ? () => window.document.body : undefined;
 
@@ -65,7 +71,7 @@ export const SideNav = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
         { displayName: 'Contacts', icon: ContactsIcon, isSelected: selectedIndex === 3 }
     ];
 
-    const drawer = (
+    const renderDrawer = () => (
         <div>
             <Box className={classes.logoBox} display="flex" alignItems="center">
                 <Box textAlign="left" fontSize="h6.fontSize">
@@ -101,7 +107,7 @@ export const SideNav = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
                     container={container}
                     variant="temporary"
                     anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-                    open={mobileOpen}
+                    open={isDrawerOpen}
                     onClose={handleDrawerToggle}
                     classes={{
                         paper: classes.drawerPaper,
@@ -110,7 +116,7 @@ export const SideNav = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
                         keepMounted: true, // Better open performance on mobile.
                     }}
                 >
-                    {drawer}
+                    { renderDrawer() }
                 </Drawer>
             </Hidden>
             <Hidden xsDown implementation="css">
@@ -121,7 +127,7 @@ export const SideNav = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
                     variant="permanent"
                     open
                 >
-                    {drawer}
+                    { renderDrawer() }
                 </Drawer>
             </Hidden>
         </nav>
