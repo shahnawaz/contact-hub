@@ -11,7 +11,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { Filters } from "../components/outreach-campaigns/Filters";
 import { CampaignsList } from "../components/outreach-campaigns/CampaignsList";
 
-const OutreachCampaigns = (props) => {
+const OutreachCampaignsPage = (props) => {
     const [activeFilters, setActiveFilters] = React.useState({});
 
     const onFiltersChange = (updatedFilters) => {
@@ -57,4 +57,4 @@ const OutreachCampaigns = (props) => {
     );
 };
 
-export default OutreachCampaigns;
+export default OutreachCampaignsPage;

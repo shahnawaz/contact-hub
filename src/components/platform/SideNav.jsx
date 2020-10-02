@@ -12,9 +12,11 @@ import {
     Box
 } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { useHistory } from "react-router-dom";
 
 // Others
 import { DashboardIcon, ContactsIcon, InboxIcon, ProductsIcon } from "../../assets/icons";
+import {routes, routesMap} from "../../router";
 
 // Style
 const useStyles = (config) => {
@@ -61,15 +63,61 @@ export const SideNav = ({ drawerWidth, isDrawerOpen, handleDrawerToggle }) => {
     const classes = useStyles({ drawerWidth });
     const theme = useTheme();
 
-    const [selectedIndex, setSelectedIndex] = React.useState(1);
     const container = window !== undefined ? () => window.document.body : undefined;
 
+    const history = useHistory();
+    const [activeRoutePath, setActiveRoutePath] = React.useState(history.location.pathname);
+    const routeTo = (path) => {
+        setActiveRoutePath(path);
+        history.push(path);
+    };
+
     const navItems = [
-        { displayName: 'Dashboard', icon: DashboardIcon, isSelected: selectedIndex === 0 },
-        { displayName: 'Outreach Campaigns', icon: InboxIcon, isSelected: selectedIndex === 1 },
-        { displayName: 'Prospecting Campaigns', icon: ProductsIcon, isSelected: selectedIndex === 2 },
-        { displayName: 'Contacts', icon: ContactsIcon, isSelected: selectedIndex === 3 }
+        {
+            displayName: 'Dashboard',
+            icon: DashboardIcon,
+            isSelected: activeRoutePath === routes[routesMap.dashboard].path,
+            path: routes[routesMap.dashboard].path
+        },
+        {
+            displayName: 'Outreach Campaigns',
+            icon: InboxIcon,
+            isSelected: activeRoutePath === routes[routesMap.outreachCampaign].path,
+            path: routes[routesMap.outreachCampaign].path
+        },
+        {
+            displayName: 'Prospecting Campaigns',
+            icon: ProductsIcon,
+            isSelected: activeRoutePath === routes[routesMap.prosCampaign].path,
+            path: routes[routesMap.prosCampaign].path
+        },
+        {
+            displayName: 'Contacts',
+            icon: ContactsIcon,
+            isSelected: activeRoutePath === routes[routesMap.contacts].path,
+            path: routes[routesMap.contacts].path
+        }
     ];
+    const renderNavListItems = () => (
+        <List>
+            {navItems.map((item, index) => (
+                <ListItem
+                    button
+                    selected={item.isSelected}
+                    key={index}
+                    onClick={() => routeTo(item.path)}
+                >
+                    <ListItemIcon>
+                        <SvgIcon
+                            component={item.icon}
+                            viewBox="0 0 24 24"
+                        />
+                    </ListItemIcon>
+                    <ListItemText primary={item.displayName} />
+                </ListItem>
+            ))}
+        </List>
+    );
 
     const renderDrawer = () => (
         <div>
@@ -79,24 +127,7 @@ export const SideNav = ({ drawerWidth, isDrawerOpen, handleDrawerToggle }) => {
                 </Box>
             </Box>
             <Divider />
-            <List>
-                {navItems.map((item, index) => (
-                    <ListItem
-                        button
-                        selected={item.isSelected}
-                        key={index}
-                        onClick={() => setSelectedIndex(index)}
-                    >
-                        <ListItemIcon>
-                            <SvgIcon
-                                component={item.icon}
-                                viewBox="0 0 24 24"
-                            />
-                        </ListItemIcon>
-                        <ListItemText primary={item.displayName} />
-                    </ListItem>
-                ))}
-            </List>
+            { renderNavListItems() }
         </div>
     );
 

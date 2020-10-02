@@ -1,13 +1,18 @@
 // 3rd party modules/packages
 import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
-
-// Pages
-import OutreachCampaigns from "../../pages/OutreachCampaigns";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from "react-router-dom";
 
 // Components
 import { SideNav } from "./SideNav";
 import { TopBar } from "./TopBar";
+
+// Others
+import { routes } from "../../router";
 
 const drawerWidth = 260;
 
@@ -42,23 +47,38 @@ export const AppLayout = (props) => {
     };
 
     return (
-        <div className={classes.appLayout}>
-            <TopBar
-                drawerWidth={drawerWidth}
-                isDrawerOpen={isDrawerOpen}
-                handleDrawerToggle={handleDrawerToggle}
-            />
-            <SideNav
-                drawerWidth={drawerWidth}
-                isDrawerOpen={isDrawerOpen}
-                handleDrawerToggle={handleDrawerToggle}
-            />
-            <main className={classes.main}>
-                <div className={classes.toolbar} />
-                <div className={classes.content}>
-                    <OutreachCampaigns />
-                </div>
-            </main>
-        </div>
+        <Router>
+            <div className={classes.appLayout}>
+
+                <TopBar
+                    drawerWidth={drawerWidth}
+                    isDrawerOpen={isDrawerOpen}
+                    handleDrawerToggle={handleDrawerToggle}
+                />
+
+                <SideNav
+                    drawerWidth={drawerWidth}
+                    isDrawerOpen={isDrawerOpen}
+                    handleDrawerToggle={handleDrawerToggle}
+                />
+
+                <main className={classes.main}>
+                    <div className={classes.toolbar} />
+                        <div className={classes.content}>
+                            <Switch>
+                                {routes.map((route, i) => (
+                                    <Route
+                                        key={i}
+                                        exact={route.exact}
+                                        path={route.path}
+                                        render={props => <route.component {...props} />}
+                                    />
+                                ))}
+                            </Switch>
+                        </div>
+                </main>
+
+            </div>
+        </Router>
     );
 };
