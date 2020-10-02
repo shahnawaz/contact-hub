@@ -16,7 +16,8 @@ const palette = {
         smoothRed: '#FF6565',
         textGray: '#4D4F5C',
         secondaryExtraLight: '#838296',
-        lightPurple: '#F0F0F7'
+        lightPurple: '#F0F0F7',
+        grayishWhite: '#D7DAE2'
     },
 };
 

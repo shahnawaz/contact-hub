@@ -32,7 +32,15 @@ const useStyles = makeStyles((theme) => ({
         },
         '& .MuiPagination-root': {
             '& .MuiPaginationItem-root': {
-                backgroundColor: theme.palette.common.white
+                backgroundColor: theme.palette.common.white,
+                borderRadius: 0,
+                margin: 0,
+                borderColor: theme.palette.others.grayishWhite,
+                color: theme.palette.others.textGray,
+                '&.Mui-selected': {
+                    backgroundColor: theme.palette.others.sharperBlue,
+                    color: theme.palette.common.white,
+                }
             }
         }
     },
